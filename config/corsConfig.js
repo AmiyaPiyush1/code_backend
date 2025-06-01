@@ -44,6 +44,8 @@ const allowedOrigins = new Set([
     "http://127.0.0.1:5174",
     "http://127.0.0.1:5175",
     "http://127.0.0.1:5176",
+    "http://localhost:3000", // Added for backend
+    "http://127.0.0.1:3000", // Added for backend
     
     // Production
     "https://code-stream-96syog8wp-anurag-amrev-7557s-projects.vercel.app",
@@ -93,7 +95,7 @@ const corsOptions = {
     },
     credentials: true,
     methods: CONFIG.ALLOWED_METHODS,
-    allowedHeaders: CONFIG.ALLOWED_HEADERS,
+    allowedHeaders: [...CONFIG.ALLOWED_HEADERS, 'Authorization'], // Added Authorization header
     exposedHeaders: CONFIG.EXPOSED_HEADERS,
     optionsSuccessStatus: 204,
     preflightContinue: false,

@@ -101,17 +101,13 @@ router.post(
 
             const { email, password, name } = req.body;
 
-            // Hash password with increased salt rounds
-            const salt = await bcrypt.genSalt(12);
-            const hashedPassword = await bcrypt.hash(password, salt);
-
             // Generate profile picture
             const picture = `https://www.gravatar.com/avatar/${crypto.createHash('md5').update(email.toLowerCase().trim()).digest('hex')}?d=mp&s=200`;
 
             // Create new user with additional fields
             const user = new User({
                 email: email.toLowerCase().trim(),
-                password: hashedPassword,
+                password: password, // Pass the plain password, let the model handle hashing
                 name: name || email.split('@')[0], // Use email username if name not provided
                 picture,
                 role: 'user',

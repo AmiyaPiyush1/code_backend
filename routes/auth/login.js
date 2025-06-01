@@ -43,14 +43,21 @@ const loginLimiter = rateLimit({
 router.post("/", loginLimiter, async (req, res, next) => {
     try {
         const { email, password, twoFactorCode } = req.body;
+        logger.info('Login attempt:', { email: email.toLowerCase().trim() });
 
         // Validate input
         if (!email || !password) {
             throw new AppError('Email and password are required', 400, ERROR_TYPES.VALIDATION);
         }
 
-        // Find user
-        const user = await User.findOne({ email }).select('+password +recoveryCodes');
+        // Find user and explicitly select password field
+        const user = await User.findOne({ email: email.toLowerCase().trim() }).select('+password +recoveryCodes');
+        logger.info('User lookup result:', { 
+            found: !!user,
+            hasPassword: !!user?.password,
+            email: email.toLowerCase().trim()
+        });
+
         if (!user) {
             throw new AppError('Invalid email or password', 401, ERROR_TYPES.AUTHENTICATION);
         }
@@ -61,7 +68,10 @@ router.post("/", loginLimiter, async (req, res, next) => {
         }
 
         // Verify password
+        logger.info('Attempting password comparison');
         const isPasswordValid = await user.comparePassword(password);
+        logger.info('Password comparison result:', { isValid: isPasswordValid });
+
         if (!isPasswordValid) {
             // Track failed attempt
             const attempts = loginAttempts.get(email) || { count: 0, timestamp: Date.now() };
@@ -92,13 +102,13 @@ router.post("/", loginLimiter, async (req, res, next) => {
         // Generate tokens
         const accessToken = jwt.sign(
             { id: user._id },
-            SECRET_KEY,
+            process.env.JWT_SECRET,
             { expiresIn: TOKEN_EXPIRY }
         );
 
         const refreshToken = jwt.sign(
             { id: user._id },
-            REFRESH_SECRET,
+            process.env.JWT_REFRESH_SECRET,
             { expiresIn: REFRESH_TOKEN_EXPIRY }
         );
 

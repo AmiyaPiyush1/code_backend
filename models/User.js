@@ -269,8 +269,29 @@ UserSchema.pre('save', async function(next) {
 // Instance methods
 UserSchema.methods.comparePassword = async function(candidatePassword) {
     try {
-        return await bcrypt.compare(candidatePassword, this.password);
+        // Ensure password field is selected
+        if (!this.password) {
+            console.error('Password field not selected for user:', this.email);
+            throw new Error('Password field not selected');
+        }
+
+        // Log password comparison attempt (without actual passwords)
+        console.log('Comparing passwords for user:', this.email);
+        
+        const isMatch = await bcrypt.compare(candidatePassword, this.password);
+        console.log('Password comparison result:', { 
+            email: this.email,
+            isMatch,
+            hashedPasswordLength: this.password.length
+        });
+        
+        return isMatch;
     } catch (error) {
+        console.error('Password comparison error:', {
+            error: error.message,
+            email: this.email,
+            hasPassword: !!this.password
+        });
         throw new Error('Password comparison failed');
     }
 };
