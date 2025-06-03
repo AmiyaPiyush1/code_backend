@@ -28,7 +28,7 @@ router.use('/sessions', sessionsRoute);
 // Add rate limiting for Google authentication
 const googleAuthLimiter = rateLimit({
   windowMs: 60 * 1000, // 1 minute
-  max: 5, // 5 requests per minute
+  max: 500, // 5 requests per minute
   message: 'Too many login attempts, please try again later',
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
