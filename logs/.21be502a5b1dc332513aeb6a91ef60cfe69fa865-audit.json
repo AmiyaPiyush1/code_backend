@@ -1,0 +1,30 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/Users/anurag/Downloads/codestream/backend/logs/.21be502a5b1dc332513aeb6a91ef60cfe69fa865-audit.json",
+    "files": [
+        {
+            "date": 1748704812453,
+            "name": "/Users/anurag/Downloads/codestream/backend/logs/rejections-2025-05-31.log",
+            "hash": "f28b7c55fbd9c62a0616db9978597aa326387846729507aeb71d98b987ff026b"
+        },
+        {
+            "date": 1748717714506,
+            "name": "/Users/anurag/Downloads/codestream/backend/logs/rejections-2025-06-01.log",
+            "hash": "ed51132bea145d6f135758ca59089e64d4b9c539859b51d8bc174686266510f3"
+        },
+        {
+            "date": 1748802632574,
+            "name": "/Users/anurag/Downloads/codestream/backend/logs/rejections-2025-06-02.log",
+            "hash": "e369e4fb029a5bff8171373a7b2235f94022497e9dc86246f8d663459bdb253a"
+        },
+        {
+            "date": 1748889161867,
+            "name": "/Users/anurag/Downloads/codestream/backend/logs/rejections-2025-06-03.log",
+            "hash": "6f24b31c5c4e29008c63968ee9f189c48dfc136619402cdd125316d9320ef824"
+        }
+    ],
+    "hashType": "sha256"
+}
