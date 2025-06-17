@@ -2,7 +2,7 @@ const winston = require('winston');
 const path = require('path');
 const fs = require('fs');
 const DailyRotateFile = require('winston-daily-rotate-file');
-const { chalk } = require('chalk');
+// const { chalk } = require('chalk');
 
 // Ensure logs directory exists
 const logsDir = path.join(process.cwd(), 'logs');

@@ -1,0 +1,8 @@
+{"context":{},"level":"info","message":"ℹ️ Checking Gemini API configuration...","timestamp":"2025-06-08 00:03:47:347"}
+{"context":{},"level":"info","message":"✅ Gemini API initialized successfully","timestamp":"2025-06-08 00:03:47:347"}
+{"context":{},"level":"info","message":"✅ Server started on port 3000","timestamp":"2025-06-08 00:03:47:347"}
+{"context":{},"level":"info","message":"✅ Server running at http://localhost:3000","timestamp":"2025-06-08 00:03:47:347"}
+{"context":{},"level":"info","message":"✅ MongoDB connection established","timestamp":"2025-06-08 00:03:48:348"}
+{"context":{},"level":"info","message":"✅ Successfully connected to MongoDB (Attempt 1)","timestamp":"2025-06-08 00:03:48:348"}
+{"context":{},"level":"info","message":"✅ Successfully connected to MongoDB","timestamp":"2025-06-08 00:03:48:348"}
+{"context":{},"level":"info","message":"ℹ️ Email server is ready to send messages","timestamp":"2025-06-08 00:03:49:349"}

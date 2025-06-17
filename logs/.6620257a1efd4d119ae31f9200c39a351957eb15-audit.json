@@ -1,0 +1,25 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "C:\\Users\\AMIYA PIYUSH\\OneDrive\\Desktop\\code_backend\\logs\\.6620257a1efd4d119ae31f9200c39a351957eb15-audit.json",
+    "files": [
+        {
+            "date": 1749319818252,
+            "name": "C:\\Users\\AMIYA PIYUSH\\OneDrive\\Desktop\\code_backend\\logs\\rejections-2025-06-07.log",
+            "hash": "19655143988a4c49d86ae3313be496c7bca24ea29848211a14131242563ca5e5"
+        },
+        {
+            "date": 1749321195632,
+            "name": "C:\\Users\\AMIYA PIYUSH\\OneDrive\\Desktop\\code_backend\\logs\\rejections-2025-06-08.log",
+            "hash": "9ab9f74f8ec0ea234a6fa67ef7e9be777bc20045ae114f85ad3dab1c9bc7ae8c"
+        },
+        {
+            "date": 1750153143268,
+            "name": "C:\\Users\\AMIYA PIYUSH\\OneDrive\\Desktop\\code_backend\\logs\\rejections-2025-06-17.log",
+            "hash": "2c519aeb4a1fcc4ed1df13a2142c1db380a98ff007fa79ad8eb14e2f5c2397e0"
+        }
+    ],
+    "hashType": "sha256"
+}
