@@ -7,7 +7,7 @@ const User = require('../models/User');
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/api/auth/google/callback",
+    callbackURL: "https://code-backend-89a2.onrender.com/api/auth/google/callback",
     scope: ['profile', 'email']
   },
   async function(accessToken, refreshToken, profile, done) {
@@ -78,7 +78,7 @@ passport.use(new GoogleStrategy({
 passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/api/auth/github/callback",
+    callbackURL: "https://code-backend-89a2.onrender.com/api/auth/github/callback",
     scope: ['user:email']
   },
   async function(accessToken, refreshToken, profile, done) {
