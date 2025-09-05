@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "C:\\Users\\AMIYA PIYUSH\\OneDrive\\Desktop\\code_backend\\routes\\debugger\\logs\\.94bbccb7dbd278065903679bafe04240606ea0d8-audit.json",
+    "files": [
+        {
+            "date": 1752849788631,
+            "name": "C:\\Users\\AMIYA PIYUSH\\OneDrive\\Desktop\\code_backend\\routes\\debugger\\logs\\rejections-2025-07-18.log",
+            "hash": "4c1d96e646933839b6f97b79d73929c2f7e9ad76c2d5664ec707e63f6dc8626e"
+        }
+    ],
+    "hashType": "sha256"
+}

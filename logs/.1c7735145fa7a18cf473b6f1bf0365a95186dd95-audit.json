@@ -1,0 +1,30 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "C:\\Users\\AMIYA PIYUSH\\OneDrive\\Desktop\\code_backend\\logs\\.1c7735145fa7a18cf473b6f1bf0365a95186dd95-audit.json",
+    "files": [
+        {
+            "date": 1751735241510,
+            "name": "C:\\Users\\AMIYA PIYUSH\\OneDrive\\Desktop\\code_backend\\logs\\exceptions-2025-07-05.log",
+            "hash": "b5f0f7a3a195bb8dd9d68065af86f7f09fd8fd4cf3c9676947e166530e516e1f"
+        },
+        {
+            "date": 1751982772413,
+            "name": "C:\\Users\\AMIYA PIYUSH\\OneDrive\\Desktop\\code_backend\\logs\\exceptions-2025-07-08.log",
+            "hash": "39118017745868a593f7bdd8632323bb90419ca99e7f0ef83823919f035352a6"
+        },
+        {
+            "date": 1752482762402,
+            "name": "C:\\Users\\AMIYA PIYUSH\\OneDrive\\Desktop\\code_backend\\logs\\exceptions-2025-07-14.log",
+            "hash": "8fecce6152e27c80b59f0f77654a6814aa3d88cfabff2b23865a8ffd8d182fda"
+        },
+        {
+            "date": 1752849789472,
+            "name": "C:\\Users\\AMIYA PIYUSH\\OneDrive\\Desktop\\code_backend\\logs\\exceptions-2025-07-18.log",
+            "hash": "2a68399083d308da0310136f08ec7b5cb80800bf7c9e26234f88f09042c0038a"
+        }
+    ],
+    "hashType": "sha256"
+}

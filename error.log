@@ -1,0 +1,121 @@
+2025-05-25T07:24:05.268Z [[31MERROR[39M]: ❌ Error in forgot password: Failed to send reset email
+2025-05-25T07:25:36.897Z [[31MERROR[39M]: ❌ Error in forgot password: Failed to send reset email
+2025-05-25T07:43:24.052Z [[31MERROR[39M]: ❌ Error in forgot password: Failed to send reset email
+2025-05-26T04:32:29.311Z [[31MERROR[39M]: ❌ MongoDB connection error: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017
+{"level":"error","message":"❌ MongoDB connection error: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017","timestamp":"2025-05-26T04:33:10.531Z"}
+{"level":"error","message":"❌ MongoDB connection error: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017","timestamp":"2025-05-26T04:33:20.005Z"}
+{"level":"error","message":"❌ MongoDB connection error: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017","timestamp":"2025-05-26T04:33:31.379Z"}
+{"level":"error","message":"❌ MongoDB connection error: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017","timestamp":"2025-05-26T04:33:41.129Z"}
+{"level":"error","message":"❌ Error: cookieParser(\"secret\") required for signed cookies","timestamp":"2025-05-26T04:36:38.304Z"}
+{"level":"error","message":"❌ Error: cookieParser(\"secret\") required for signed cookies\n    at res.cookie (/Users/anurag/Downloads/codeStream/backend/node_modules/express/lib/response.js:868:11)\n    at /Users/anurag/Downloads/codeStream/backend/routes/auth.js:164:9\n    at Layer.handle [as handle_request] (/Users/anurag/Downloads/codeStream/backend/node_modules/express/lib/router/layer.js:95:5)\n    at next (/Users/anurag/Downloads/codeStream/backend/node_modules/express/lib/router/route.js:149:13)\n    at complete (/Users/anurag/Downloads/codeStream/backend/node_modules/passport/lib/middleware/authenticate.js:280:13)\n    at /Users/anurag/Downloads/codeStream/backend/node_modules/passport/lib/middleware/authenticate.js:287:15\n    at pass (/Users/anurag/Downloads/codeStream/backend/node_modules/passport/lib/authenticator.js:446:14)\n    at Authenticator.transformAuthInfo (/Users/anurag/Downloads/codeStream/backend/node_modules/passport/lib/authenticator.js:468:5)\n    at /Users/anurag/Downloads/codeStream/backend/node_modules/passport/lib/middleware/authenticate.js:284:22\n    at /Users/anurag/Downloads/codeStream/backend/node_modules/passport/lib/http/request.js:41:7","timestamp":"2025-05-26T04:36:38.305Z"}
+{"level":"error","message":"❌ Error: cookieParser(\"secret\") required for signed cookies","timestamp":"2025-05-26T04:38:30.035Z"}
+{"level":"error","message":"❌ Error: cookieParser(\"secret\") required for signed cookies\n    at res.cookie (/Users/anurag/Downloads/codeStream/backend/node_modules/express/lib/response.js:868:11)\n    at /Users/anurag/Downloads/codeStream/backend/routes/auth.js:164:9\n    at Layer.handle [as handle_request] (/Users/anurag/Downloads/codeStream/backend/node_modules/express/lib/router/layer.js:95:5)\n    at next (/Users/anurag/Downloads/codeStream/backend/node_modules/express/lib/router/route.js:149:13)\n    at complete (/Users/anurag/Downloads/codeStream/backend/node_modules/passport/lib/middleware/authenticate.js:280:13)\n    at /Users/anurag/Downloads/codeStream/backend/node_modules/passport/lib/middleware/authenticate.js:287:15\n    at pass (/Users/anurag/Downloads/codeStream/backend/node_modules/passport/lib/authenticator.js:446:14)\n    at Authenticator.transformAuthInfo (/Users/anurag/Downloads/codeStream/backend/node_modules/passport/lib/authenticator.js:468:5)\n    at /Users/anurag/Downloads/codeStream/backend/node_modules/passport/lib/middleware/authenticate.js:284:22\n    at /Users/anurag/Downloads/codeStream/backend/node_modules/passport/lib/http/request.js:41:7","timestamp":"2025-05-26T04:38:30.036Z"}
+{"level":"error","message":"❌ Error: Bad Request","timestamp":"2025-05-26T04:38:43.203Z"}
+{"level":"error","message":"❌ TokenError: Bad Request\n    at OAuth2Strategy.parseErrorResponse (/Users/anurag/Downloads/codeStream/backend/node_modules/passport-oauth2/lib/strategy.js:373:12)\n    at OAuth2Strategy._createOAuthError (/Users/anurag/Downloads/codeStream/backend/node_modules/passport-oauth2/lib/strategy.js:420:16)\n    at /Users/anurag/Downloads/codeStream/backend/node_modules/passport-oauth2/lib/strategy.js:177:45\n    at /Users/anurag/Downloads/codeStream/backend/node_modules/oauth/lib/oauth2.js:196:18\n    at passBackControl (/Users/anurag/Downloads/codeStream/backend/node_modules/oauth/lib/oauth2.js:132:9)\n    at IncomingMessage.<anonymous> (/Users/anurag/Downloads/codeStream/backend/node_modules/oauth/lib/oauth2.js:157:7)\n    at IncomingMessage.emit (node:events:530:35)\n    at endReadableNT (node:internal/streams/readable:1698:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)","timestamp":"2025-05-26T04:38:43.204Z"}
+{"level":"error","message":"❌ Google OAuth callback error: Bad Request","timestamp":"2025-05-26T04:39:05.931Z"}
+{"level":"error","message":"❌ Token generation error: cookieParser(\"secret\") required for signed cookies","timestamp":"2025-05-26T04:39:53.560Z"}
+{"level":"error","message":"❌ Login error: Illegal arguments: string, undefined","timestamp":"2025-05-26T04:41:54.619Z"}
+{"level":"error","message":"❌ Login error: Illegal arguments: string, undefined","timestamp":"2025-05-26T04:43:00.315Z"}
+{"level":"error","message":"❌ Error in forgot password: sendPasswordResetEmail is not defined","timestamp":"2025-05-26T04:47:59.911Z"}
+{"level":"error","message":"❌ Error in forgot password: sendPasswordResetEmail is not defined","timestamp":"2025-05-26T04:48:09.500Z"}
+2025-05-26T05:22:41.687Z [[31MERROR[39M]: ❌ Error: E11000 duplicate key error collection: test.users index: email_1 dup key: { email: "23ce01006@iitbbs.ac.in" }
+2025-05-26T05:22:41.688Z [[31MERROR[39M]: ❌ Stack: MongoServerError: E11000 duplicate key error collection: test.users index: email_1 dup key: { email: "23ce01006@iitbbs.ac.in" }
+    at InsertOneOperation.execute (/Users/anurag/Downloads/codeStream/backend/node_modules/mongodb/lib/operations/insert.js:51:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async tryOperation (/Users/anurag/Downloads/codeStream/backend/node_modules/mongodb/lib/operations/execute_operation.js:207:20)
+    at async executeOperation (/Users/anurag/Downloads/codeStream/backend/node_modules/mongodb/lib/operations/execute_operation.js:75:16)
+    at async Collection.insertOne (/Users/anurag/Downloads/codeStream/backend/node_modules/mongodb/lib/collection.js:157:16)
+2025-05-26T05:22:58.683Z [[31MERROR[39M]: ❌ Error: Bad Request
+2025-05-26T05:22:58.684Z [[31MERROR[39M]: ❌ Stack: TokenError: Bad Request
+    at OAuth2Strategy.parseErrorResponse (/Users/anurag/Downloads/codeStream/backend/node_modules/passport-oauth2/lib/strategy.js:373:12)
+    at OAuth2Strategy._createOAuthError (/Users/anurag/Downloads/codeStream/backend/node_modules/passport-oauth2/lib/strategy.js:420:16)
+    at /Users/anurag/Downloads/codeStream/backend/node_modules/passport-oauth2/lib/strategy.js:177:45
+    at /Users/anurag/Downloads/codeStream/backend/node_modules/oauth/lib/oauth2.js:196:18
+    at passBackControl (/Users/anurag/Downloads/codeStream/backend/node_modules/oauth/lib/oauth2.js:132:9)
+    at IncomingMessage.<anonymous> (/Users/anurag/Downloads/codeStream/backend/node_modules/oauth/lib/oauth2.js:157:7)
+    at IncomingMessage.emit (node:events:530:35)
+    at endReadableNT (node:internal/streams/readable:1698:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-05-26T05:23:35.080Z [[31MERROR[39M]: ❌ Error: E11000 duplicate key error collection: test.users index: email_1 dup key: { email: "23ce01006@iitbbs.ac.in" }
+2025-05-26T05:23:35.081Z [[31MERROR[39M]: ❌ Stack: MongoServerError: E11000 duplicate key error collection: test.users index: email_1 dup key: { email: "23ce01006@iitbbs.ac.in" }
+    at InsertOneOperation.execute (/Users/anurag/Downloads/codeStream/backend/node_modules/mongodb/lib/operations/insert.js:51:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async tryOperation (/Users/anurag/Downloads/codeStream/backend/node_modules/mongodb/lib/operations/execute_operation.js:207:20)
+    at async executeOperation (/Users/anurag/Downloads/codeStream/backend/node_modules/mongodb/lib/operations/execute_operation.js:75:16)
+    at async Collection.insertOne (/Users/anurag/Downloads/codeStream/backend/node_modules/mongodb/lib/collection.js:157:16)
+2025-05-26T05:23:51.908Z [[31MERROR[39M]: ❌ Error: Bad Request
+2025-05-26T05:23:51.909Z [[31MERROR[39M]: ❌ Stack: TokenError: Bad Request
+    at OAuth2Strategy.parseErrorResponse (/Users/anurag/Downloads/codeStream/backend/node_modules/passport-oauth2/lib/strategy.js:373:12)
+    at OAuth2Strategy._createOAuthError (/Users/anurag/Downloads/codeStream/backend/node_modules/passport-oauth2/lib/strategy.js:420:16)
+    at /Users/anurag/Downloads/codeStream/backend/node_modules/passport-oauth2/lib/strategy.js:177:45
+    at /Users/anurag/Downloads/codeStream/backend/node_modules/oauth/lib/oauth2.js:196:18
+    at passBackControl (/Users/anurag/Downloads/codeStream/backend/node_modules/oauth/lib/oauth2.js:132:9)
+    at IncomingMessage.<anonymous> (/Users/anurag/Downloads/codeStream/backend/node_modules/oauth/lib/oauth2.js:157:7)
+    at IncomingMessage.emit (node:events:530:35)
+    at endReadableNT (node:internal/streams/readable:1698:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-05-26T17:39:26.675Z [[31MERROR[39M]: ❌ Error fetching user profile: getaddrinfo ENOTFOUND codestream-shard-00-00.ttvh8.mongodb.net
+2025-05-28T05:07:57.021Z [[31MERROR[39M]: ❌ Server error during login: Illegal arguments: string, undefined
+2025-05-28T05:08:12.272Z [[31MERROR[39M]: ❌ Server error during login: Illegal arguments: string, undefined
+2025-05-28T07:40:57.554Z [[31MERROR[39M]: ❌ Error fetching user profile: Cannot do exclusion on field password in inclusion projection
+2025-05-28T07:41:05.101Z [[31MERROR[39M]: ❌ Error fetching user profile: Cannot do exclusion on field password in inclusion projection
+2025-05-28T09:18:55.127Z [[31MERROR[39M]: ❌ Server error during login: Cannot read properties of undefined (reading 'toLowerCase')
+2025-05-28T09:19:05.154Z [[31MERROR[39M]: ❌ Server error during login: Cannot read properties of undefined (reading 'toLowerCase')
+2025-05-28T09:22:09.139Z [[31MERROR[39M]: ❌ Server error during login: Cannot read properties of undefined (reading 'toLowerCase')
+2025-05-28T09:22:20.189Z [[31MERROR[39M]: ❌ Server error during login: Cannot read properties of undefined (reading 'toLowerCase')
+2025-05-28T09:22:36.645Z [[31MERROR[39M]: ❌ Server error during login: Cannot read properties of undefined (reading 'toLowerCase')
+2025-05-29T20:57:40.400Z [[31MERROR[39M]: ❌ MongoDB Connection Error: Socket 'secureConnect' timed out after 30002ms (connectTimeoutMS: 30000)
+2025-05-29T20:57:40.400Z [[31MERROR[39M]: ❌ Failed to reconnect to MongoDB: Socket 'secureConnect' timed out after 30002ms (connectTimeoutMS: 30000)
+2025-05-29T20:57:40.400Z [[31MERROR[39M]: ❌ MongoDB error: Socket 'secureConnect' timed out after 30002ms (connectTimeoutMS: 30000)
+2025-05-29T20:58:21.570Z [[31MERROR[39M]: ❌ MongoDB Connection Error: Server selection timed out after 30000 ms
+2025-05-29T20:58:21.570Z [[31MERROR[39M]: ❌ Failed to reconnect to MongoDB: Server selection timed out after 30000 ms
+2025-05-29T20:58:21.570Z [[31MERROR[39M]: ❌ MongoDB error: Server selection timed out after 30000 ms
+2025-05-29T20:58:56.582Z [[31MERROR[39M]: ❌ MongoDB Connection Error: Server selection timed out after 30000 ms
+2025-05-29T20:58:56.583Z [[31MERROR[39M]: ❌ Failed to reconnect to MongoDB: Server selection timed out after 30000 ms
+2025-05-29T20:58:56.583Z [[31MERROR[39M]: ❌ MongoDB error: Server selection timed out after 30000 ms
+2025-05-29T20:59:31.943Z [[31MERROR[39M]: ❌ MongoDB Connection Error: Socket 'secureConnect' timed out after 30002ms (connectTimeoutMS: 30000)
+2025-05-29T20:59:31.943Z [[31MERROR[39M]: ❌ Failed to reconnect to MongoDB: Socket 'secureConnect' timed out after 30002ms (connectTimeoutMS: 30000)
+2025-05-29T20:59:31.943Z [[31MERROR[39M]: ❌ MongoDB error: Socket 'secureConnect' timed out after 30002ms (connectTimeoutMS: 30000)
+2025-05-29T21:00:06.955Z [[31MERROR[39M]: ❌ MongoDB Connection Error: Server selection timed out after 30000 ms
+2025-05-29T21:00:06.955Z [[31MERROR[39M]: ❌ Failed to reconnect to MongoDB: Server selection timed out after 30000 ms
+2025-05-29T21:00:06.955Z [[31MERROR[39M]: ❌ MongoDB error: Server selection timed out after 30000 ms
+2025-05-29T21:00:42.082Z [[31MERROR[39M]: ❌ MongoDB Connection Error: Server selection timed out after 30000 ms
+2025-05-29T21:00:42.082Z [[31MERROR[39M]: ❌ Failed to reconnect to MongoDB: Server selection timed out after 30000 ms
+2025-05-29T21:00:42.082Z [[31MERROR[39M]: ❌ MongoDB error: Server selection timed out after 30000 ms
+2025-05-29T21:01:17.091Z [[31MERROR[39M]: ❌ MongoDB Connection Error: Server selection timed out after 30000 ms
+2025-05-29T21:01:17.091Z [[31MERROR[39M]: ❌ Failed to reconnect to MongoDB: Server selection timed out after 30000 ms
+2025-05-29T21:01:17.091Z [[31MERROR[39M]: ❌ MongoDB error: Server selection timed out after 30000 ms
+2025-05-29T21:01:52.218Z [[31MERROR[39M]: ❌ MongoDB Connection Error: Server selection timed out after 30000 ms
+2025-05-29T21:01:52.218Z [[31MERROR[39M]: ❌ Failed to reconnect to MongoDB: Server selection timed out after 30000 ms
+2025-05-29T21:01:52.218Z [[31MERROR[39M]: ❌ MongoDB error: Server selection timed out after 30000 ms
+2025-05-29T21:02:27.227Z [[31MERROR[39M]: ❌ MongoDB Connection Error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+2025-05-29T21:02:27.227Z [[31MERROR[39M]: ❌ Failed to reconnect to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+2025-05-29T21:02:27.227Z [[31MERROR[39M]: ❌ MongoDB error: Server selection timed out after 30000 ms
+2025-05-29T21:03:02.593Z [[31MERROR[39M]: ❌ MongoDB Connection Error: Socket 'secureConnect' timed out after 30002ms (connectTimeoutMS: 30000)
+2025-05-29T21:03:02.593Z [[31MERROR[39M]: ❌ Failed to reconnect to MongoDB: Socket 'secureConnect' timed out after 30002ms (connectTimeoutMS: 30000)
+2025-05-29T21:03:02.593Z [[31MERROR[39M]: ❌ MongoDB error: Socket 'secureConnect' timed out after 30002ms (connectTimeoutMS: 30000)
+2025-05-29T21:03:37.604Z [[31MERROR[39M]: ❌ MongoDB Connection Error: Server selection timed out after 30000 ms
+2025-05-29T21:03:37.605Z [[31MERROR[39M]: ❌ Failed to reconnect to MongoDB: Server selection timed out after 30000 ms
+2025-05-29T21:03:37.605Z [[31MERROR[39M]: ❌ MongoDB error: Server selection timed out after 30000 ms
+2025-05-29T21:04:12.817Z [[31MERROR[39M]: ❌ MongoDB Connection Error: Server selection timed out after 30000 ms
+2025-05-29T21:04:12.817Z [[31MERROR[39M]: ❌ Failed to reconnect to MongoDB: Server selection timed out after 30000 ms
+2025-05-29T21:04:12.817Z [[31MERROR[39M]: ❌ MongoDB error: Server selection timed out after 30000 ms
+2025-05-30T15:14:14.502Z [[31MERROR[39M]: ❌ [object Object]
+2025-05-30T15:14:45.230Z [[31MERROR[39M]: ❌ [object Object]
+2025-05-30T15:14:47.084Z [[31MERROR[39M]: ❌ [object Object]
+2025-05-30T15:20:42.431Z [[31MERROR[39M] [{}]: ❌ [object Object]
+2025-05-30T15:26:52.605Z [[31MERROR[39M] [{}]: ❌ [object Object]
+2025-05-30T15:34:53.453Z [[31MERROR[39M] [{}]: ❌ [object Object]
+2025-05-30T15:35:09.817Z [[31MERROR[39M] [{}]: ❌ [object Object]
+2025-05-30T16:34:53.617Z [[31MERROR[39M] [{"error":"Cannot read properties of undefined (reading 'push')","stack":"TypeError: Cannot read properties of undefined (reading 'push')\n    at updateConversationHistory (/Users/anurag/Downloads/codeStream/backend/routes/gemini.js:560:13)\n    at /Users/anurag/Downloads/codeStream/backend/routes/gemini.js:330:9\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)","name":"TypeError"}]: ❌ Gemini API Error:
+2025-05-30T16:34:53.618Z [[31MERROR[39M] [{}]: ❌ [object Object]
+2025-05-30T17:51:17.083Z [[31MERROR[39M] [{}]: ❌ [object Object]
+2025-05-30T18:53:30.788Z [[31MERROR[39M] [{}]: ❌ [object Object]
+2025-05-30T19:30:44.178Z [[31MERROR[39M] [{"action":"login","email":"random@gmail.com","error":"Invalid credentials"}]: ❌ Login error
+2025-05-30T19:30:44.179Z [[31MERROR[39M] [{"action":"login","email":"random@gmail.com"}]: ❌ [object Object]
+2025-05-30T19:30:49.067Z [[31MERROR[39M] [{"action":"login","email":"random@gmail.com","error":"Invalid credentials"}]: ❌ Login error
+2025-05-30T19:30:49.067Z [[31MERROR[39M] [{"action":"login","email":"random@gmail.com"}]: ❌ [object Object]
+2025-05-30T19:30:58.064Z [[31MERROR[39M] [{"action":"login","email":"random@gmail.com","error":"Invalid credentials"}]: ❌ Login error
+2025-05-30T19:30:58.064Z [[31MERROR[39M] [{"action":"login","email":"random@gmail.com"}]: ❌ [object Object]
+2025-05-31T06:38:54.358Z [[31MERROR[39M] [{}]: ❌ [object Object]
+2025-05-31T08:00:31.142Z [[31MERROR[39M] [{}]: ❌ [object Object]
