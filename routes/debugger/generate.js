@@ -495,25 +495,22 @@ router.post('/debugger/recursion/main', async (req, res) => {
   try {
     const { problem, language, input } = req.body;
 
-    // Validate request body
     if (!problem || !language) {
-      console.error("❌ Missing required fields in request body");
       return res.status(400).json({ 
         error: "Missing required fields", 
-        details: "Both 'problem' and 'language' are required" 
+        details: "Both 'problem' and 'language' are required"
       });
     }
 
     const apiKey = process.env.GEMINI_API_KEY;
-
     if (!apiKey) {
-      console.error("❌ Gemini API key is missing in environment variables");
       return res.status(500).json({ error: "API key is missing. Check your .env file." });
     }
 
     const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
-    const prompt = `
+    // Keep your original base prompt exactly as is:
+    const basePrompt = `
 You are a code execution analyzer. Your task is to analyze the recursive function and generate a complete trace.
 
 Given this recursive function in ${language}:
@@ -525,113 +522,235 @@ And it is called with:
 ${input || "no input provided"}
 
 Generate a JSON-formatted trace of the function calls and returns. Each trace step should follow this structure:
+if the problem is simple recursion give this format:
 [
-  { "event": "call", "func": "function_name", "args": { "param1": value }, "depth": number },
-  { "event": "return", "func": "function_name", "value": returnValue, "depth": number, "note": "base case" }
+  { "event": "call", "func": "function_name({extremely initial val given in starting of code}) ", "args": { "param1": value } , "depth": number , "note":"a one liner explanation of current execution including things like how this new argumenet why this fn and all ,    "code":  Here give the line from the code which is under execution if it is multiple lines at once given multiple lines then },
+  { "event": "return", "func": "function_name({extremely initial val given in starting of code}) ", "value": returnValue, "depth": number, "note": "base case reached : as {base_case} satisfy {n} ,  "code":Here give the line from the code which is under execution if it is multiple lines at once given multiple lines then }
 ]
-
+  otherwise if recursion includes grid or matrix then in arguments if teh board or grid is being passed then there dont generete the matrix just write the argumnet name to preserve tokens
+ 
+  [
+  { "matrix": [
+      ["*A", "B", "C"],
+      ["D", "E", "F"]
+    ], "event": "call", "func": "function_name({extremely initial val given in starting of code}) ", "args": { "param1": value } , "depth": number , "note":"a one liner explanation of current execution including things like how this new argumenet why this fn and all ,    "code":  Here give the line from the code which is under execution if it is multiple lines at once given multiple lines then },
+  { "matrix": [
+      ["*A", "B", "C"],
+      ["D", "E", "F"]
+    ], "event": "return", "func": "function_name({extremely initial val given in starting of code}) ", "value": returnValue, "depth": number, "note": "base case reached : as {base_case} satisfy {n} ,  "code":Here give the line from the code which is under execution if it is multiple lines at once given multiple lines then }
+  ]
 Important:
 1. Only output valid JSON
 2. Ensure all JSON objects are properly closed
-3. Include the "note" field only for base case returns
 4. Keep the response concise and complete
 5. Do not include any explanations or markdown
 6. Limit the trace to a maximum of 20 steps
-7. For large inputs, focus on the first few recursive calls
-
-Example output format:
-[
-  {"event":"call","func":"fibonacci","args":{"n":3},"depth":0},
-  {"event":"call","func":"fibonacci","args":{"n":2},"depth":1},
-  {"event":"call","func":"fibonacci","args":{"n":1},"depth":2},
-  {"event":"return","func":"fibonacci","value":1,"depth":2,"note":"base case"},
-  {"event":"call","func":"fibonacci","args":{"n":0},"depth":2},
-  {"event":"return","func":"fibonacci","value":0,"depth":2,"note":"base case"},
-  {"event":"return","func":"fibonacci","value":1,"depth":1},
-  {"event":"call","func":"fibonacci","args":{"n":1},"depth":1},
-  {"event":"return","func":"fibonacci","value":1,"depth":1,"note":"base case"},
-  {"event":"return","func":"fibonacci","value":2,"depth":0}
+7. If the recursive code operates on a 2D grid (for example, using a matrix or board), then:
+   - Include every function call in the trace, even intermediate ones don't skip any node here.
+   - However, if the grid size exceeds 5 rows or 5 columns (i.e., more than 5 in either dimension), then do not trace the execution. Instead, immediately return the following JSON as the only output:
+     [{ "event": "error", "note": "Heavy recursive load: grid size exceeds 5x5 limit" }]
+[  
 ]`;
 
-    console.log("📝 Sending request to Gemini API");
+    // === NEW: chunk logic ===
+    let allTrace = [];
+    let depthStart = 0;
+    let chunkSize = 3;   // Small slice for each loop
+    let maxSteps = 20;
 
-    const response = await axios.post(
-      endpoint,
-      { 
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: {
-          maxOutputTokens: 2048,
-          temperature: 0.1,
-          topP: 0.8,
-          topK: 40
-        }
-      },
-      { headers: { "Content-Type": "application/json" } }
-    );
+    while (allTrace.length < maxSteps) {
+      // Add depth instructions to the prompt
+      const chunkPrompt = `
+${basePrompt}
+IMPORTANT: Only output trace steps for depth ${depthStart} to ${depthStart + chunkSize - 1}.
+`;
 
-    const responseText = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
-    if (!responseText) {
-      console.error("❌ Empty response from Gemini API");
-      return res.status(500).json({ error: "Received an empty response from Gemini API." });
-    }
+      console.log(`🧩 Requesting depth ${depthStart} to ${depthStart + chunkSize - 1}`);
 
-    // Clean the response and ensure it's valid JSON
-    const cleanedResponseText = responseText
-      .replace(/```(json)?/g, '') // Remove markdown code blocks
-      .replace(/[\u0000-\u001F\u007F-\u009F]/g, '') // Remove control characters
-      .replace(/\n/g, ' ') // Replace newlines with spaces
-      .replace(/\s+/g, ' ') // Normalize whitespace
-      .trim();
+      const response = await axios.post(
+        endpoint,
+        {
+          contents: [{ parts: [{ text: chunkPrompt }] }],
+          generationConfig: {
+            maxOutputTokens: 10000,   // Small limit for a chunk
+            temperature: 0.1,
+            topP: 0.8,
+            topK: 40
+          }
+        },
+        { headers: { "Content-Type": "application/json" } }
+      );
 
-    let parsedOutput;
-    try {
-      // Sanitize the response before parsing
-      const sanitizedJson = sanitizeJsonString(cleanedResponseText);
-      parsedOutput = JSON.parse(sanitizedJson);
-      
-      // Validate the structure of the parsed output
-      if (!Array.isArray(parsedOutput)) {
-        throw new Error("Response is not an array");
+      const responseText = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!responseText) {
+        console.error("❌ Empty response from Gemini API for chunk");
+        break;
       }
-      
-      // Limit the number of steps to prevent overwhelming the frontend
-      if (parsedOutput.length > 20) {
-        parsedOutput = parsedOutput.slice(0, 20);
-      }
-      
-      // Validate each step in the trace
-      parsedOutput.forEach((step, index) => {
-        if (!step.event || !step.func || typeof step.depth !== 'number') {
-          throw new Error(`Invalid step at index ${index}`);
-        }
-      });
 
-      console.log("✅ Successfully parsed and validated JSON response");
-      res.json(parsedOutput);
-    } catch (parseError) {
-      console.error("❌ JSON parsing error:", parseError);
-      console.error("Raw response:", cleanedResponseText);
-      
-      // Try to fix common JSON issues
+      // Clean up as before
+      const cleaned = responseText
+        .replace(/```(json)?/g, '')
+        .replace(/[\u0000-\u001F\u007F-\u009F]/g, '')
+        .replace(/\n/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+      let chunk;
       try {
-        // If the JSON is cut off, try to complete it
-        const fixedJson = cleanedResponseText.replace(/,\s*$/, '') + ']';
-        const sanitizedFixedJson = sanitizeJsonString(fixedJson);
-        parsedOutput = JSON.parse(sanitizedFixedJson);
-        console.log("✅ Successfully parsed fixed JSON response");
-        res.json(parsedOutput);
-      } catch (fixError) {
-        return res.status(500).json({ 
-          error: "Failed to parse the response as JSON",
-          details: parseError.message,
-          raw: cleanedResponseText
-        });
+        chunk = JSON.parse(cleaned);
+        if (!Array.isArray(chunk)) throw new Error("Chunk is not an array");
+      } catch (e) {
+        console.error("❌ JSON parse error for chunk:", e);
+        console.log("Raw:", cleaned);
+        break; // Stop loop on bad chunk
       }
+
+      if (chunk.length === 0) break; // No more trace steps
+
+      allTrace.push(...chunk);
+      depthStart += chunkSize;
+
+      if (chunk.length < chunkSize) break; // Finished trace
     }
+
+    // Final output limit to maxSteps
+    res.json(allTrace.slice(0, maxSteps));
 
   } catch (error) {
     console.error("❌ Error in /debugger/recursion/main:", error);
-    res.status(500).json({ 
+    res.status(500).json({
+      error: "Failed to generate trace from Gemini API",
+      details: error.message
+    });
+  }
+});
+
+
+router.post('/debugger/dynamicprogramming/main', async (req, res) => {
+  try {
+    const { problem, language, input } = req.body;
+
+    if (!problem || !language) {
+      console.error("❌ Missing required fields in request body");
+      return res.status(400).json({
+        error: "Missing required fields",
+        details: "Both 'problem' and 'language' are required"
+      });
+    }
+
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      console.error("❌ Gemini API key is missing in environment variables");
+      return res.status(500).json({ error: "API key is missing. Check your .env file." });
+    }
+
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+    const basePrompt = `
+You are a code execution analyzer. Your task is to analyze the rdynamicprogramming and generate a complete trace.
+
+Given this DP function in ${language}:
+
+${problem}
+
+And it is called with:
+
+${input || "no input provided"}
+
+Generate a JSON-formatted trace of the function calls and returns. Each trace step should follow this structure:
+if the problem is simple recursion give this format:
+
+[
+  {"dpTable": [
+      ["*A", "B", "C"],
+      ["D", "E", "F"]
+    ], "event": "call", "func": "function_name({extremely initial val given in starting of code}) ", "args": { "param1": value } , "depth": number , "note":"a one liner explanation of current execution including things like how this new argumenet why this fn and all ,    "code":  Here give the line from the code which is under execution if it is multiple lines at once given multiple lines then },
+  {"dpTable": [
+      ["b", "B", "C"],
+      ["D", "E", "k"]
+    ], "event": "return", "func": "function_name({extremely initial val given in starting of code}) ", "value": returnValue, "depth": number, "note": "base case reached : as {base_case} satisfy {n} ,  "code":Here give the line from the code which is under execution if it is multiple lines at once given multiple lines then }
+]
+Important:
+1. Only output valid JSON
+2. Ensure all JSON objects are properly closed
+4. Keep the response concise and complete
+5. Do not include any explanations or markdown
+6. Limit the trace to a maximum of 20 steps
+7. If the recursive code operates on a 2D grid (for example, using a matrix or board), then:
+   - Include every function call in the trace, even intermediate ones don't skip any node here.
+   - However, if the grid size exceeds 5 rows or 5 columns (i.e., more than 5 in either dimension), then do not trace the execution. Instead, immediately return the following JSON as the only output:
+     [{ "event": "error", "note": "Heavy recursive load: grid size exceeds 5x5 limit" }]
+`;
+
+    console.log("📝 Sending chunked requests to Gemini API");
+
+    const chunkSize = 20;  // steps per chunk
+    let totalTrace = [];
+    let nextDepth = 0;
+    let hasMore = true;
+
+    while (hasMore) {
+      const chunkPrompt = `${basePrompt}
+Continue from depth ${nextDepth}, generate next ${chunkSize} steps.
+If finished, just return an empty array [].
+`;
+
+      const response = await axios.post(
+        endpoint,
+        {
+          contents: [{ parts: [{ text: chunkPrompt }] }],
+          generationConfig: {
+            maxOutputTokens: 10000,
+            temperature: 0.1,
+            topP: 0.8,
+            topK: 40
+          }
+        },
+        { headers: { "Content-Type": "application/json" } }
+      );
+
+      const responseText = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!responseText) {
+        console.error("❌ Empty chunk from Gemini API");
+        break;
+      }
+
+      const cleanedResponseText = responseText
+        .replace(/```(json)?/g, '')
+        .replace(/[\u0000-\u001F\u007F-\u009F]/g, '')
+        .replace(/\n/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+      let parsedChunk = [];
+      try {
+        const sanitized = sanitizeJsonString(cleanedResponseText);
+        parsedChunk = JSON.parse(sanitized);
+      } catch (e) {
+        console.error("❌ JSON parse error on chunk:", e);
+        break; // Stop chunking if invalid
+      }
+
+      if (!Array.isArray(parsedChunk) || parsedChunk.length === 0) {
+        hasMore = false;
+        break;
+      }
+
+      totalTrace.push(...parsedChunk);
+      nextDepth += chunkSize;
+
+      if (totalTrace.length >= 20) {
+        totalTrace = totalTrace.slice(0, 20);
+        hasMore = false;
+      }
+    }
+
+    console.log(`✅ Finished chunking — total steps: ${totalTrace.length}`);
+    res.json(totalTrace);
+
+  } catch (error) {
+    console.error("❌ Error in /debugger/dynamicprogramming/main:", error);
+    res.status(500).json({
       error: "Failed to generate response from Gemini API",
       details: error.message
     });
@@ -639,87 +758,87 @@ Example output format:
 });
 
 
-router.post('/debugger/dynamicprogramming/main', async (req, res) => { 
-  try {
-    const { problem, language, input } = req.body;
-    const apiKey = process.env.GEMINI_API_KEY;
+// router.post('/debugger/main', async (req, res) => { 
+//   try {
+//     const { problem, language, input } = req.body;
+//     const apiKey = process.env.GEMINI_API_KEY;
 
-    if (!apiKey) {
-      return res.status(500).json({ error: "API key is missing. Check your .env file." });
-    }
+//     if (!apiKey) {
+//       return res.status(500).json({ error: "API key is missing. Check your .env file." });
+//     }
 
-    // Construct the Gemini API endpoint using the API key from the .env file
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+//     // Construct the Gemini API endpoint using the API key from the .env file
+//     const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
-    // Prepare the new prompt with the desired JSON output format for dynamic programming.
-    // It includes dpTable field to capture memoisation/tabulation/space optimisation info.
-    const prompt = `
-You are a dynamic programming execution analyzer.
+//     // Prepare the new prompt with the desired JSON output format for dynamic programming.
+//     // It includes dpTable field to capture memoisation/tabulation/space optimisation info.
+//     const prompt = `
+// You are a dynamic programming execution analyzer.
 
-Given this dynamic programming problem in ${language}:
+// Given this dynamic programming problem in ${language}:
 
-${problem}
+// ${problem}
 
-And it is called with:
+// And it is called with:
 
-${input}
+// ${input}
 
-Generate a JSON-formatted trace of the execution, including DP table states.
-Each trace step should follow this structure:
-[
-  {
-    "event": "call",
-    "func": "function_name",
-    "args": { "param1": value },
-    "depth": number,
-    "dpTable": { /* current state of dp table / memoisation cache */ }
-  },
-  {
-    "event": "return",
-    "func": "function_name",
-    "value": returnValue,
-    "depth": number,
-    "note": "base case reached", // Include note only when applicable
-    "dpTable": { /* current state of dp table / memoisation cache */ }
-  }
-]
+// Generate a JSON-formatted trace of the execution, including DP table states.
+// Each trace step should follow this structure:
+// [
+//   {
+//     "event": "call",
+//     "func": "function_name",
+//     "args": { "param1": value },
+//     "depth": number,
+//     "dpTable": { /* current state of dp table / memoisation cache */ }
+//   },
+//   {
+//     "event": "return",
+//     "func": "function_name",
+//     "value": returnValue,
+//     "depth": number,
+//     "note": "base case reached", // Include note only when applicable
+//     "dpTable": { /* current state of dp table / memoisation cache */ }
+//   }
+// ]
 
-Only output the JSON. Do not explain.
-`;
+// Only output the JSON. Do not explain.
+// `;
 
-    // Call the Gemini API
-    const response = await axios.post(
-      endpoint,
-      { contents: [{ parts: [{ text: prompt }] }] },
-      { headers: { "Content-Type": "application/json" } }
-    );
+//     // Call the Gemini API
+//     const response = await axios.post(
+//       endpoint,
+//       { contents: [{ parts: [{ text: prompt }] }] },
+//       { headers: { "Content-Type": "application/json" } }
+//     );
 
-    // Extract the response text from the Gemini API
-    const responseText = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
-    if (!responseText) {
-      return res.status(500).json({ error: "Received an empty response from Gemini API." });
-    }
+//     // Extract the response text from the Gemini API
+//     const responseText = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
+//     if (!responseText) {
+//       return res.status(500).json({ error: "Received an empty response from Gemini API." });
+//     }
 
-    // Clean the response by removing markdown code fences and an optional "json" tag
-    const cleanedResponseText = responseText.replace(/```(json)?/g, '').trim();
+//     // Clean the response by removing markdown code fences and an optional "json" tag
+//     const cleanedResponseText = responseText.replace(/```(json)?/g, '').trim();
 
-    // Try to parse the cleaned JSON response
-    let parsedOutput;
-    try {
-      const sanitizedJson = sanitizeJsonString(cleanedResponseText);
-      parsedOutput = JSON.parse(sanitizedJson);
-    } catch (parseError) {
-      return res.status(500).json({ error: "Failed to parse the response as JSON.", raw: responseText });
-    }
+//     // Try to parse the cleaned JSON response
+//     let parsedOutput;
+//     try {
+//       const sanitizedJson = sanitizeJsonString(cleanedResponseText);
+//       parsedOutput = JSON.parse(sanitizedJson);
+//     } catch (parseError) {
+//       return res.status(500).json({ error: "Failed to parse the response as JSON.", raw: responseText });
+//     }
 
-    // Send the parsed JSON output back to the frontend
-    res.json(parsedOutput);
+//     // Send the parsed JSON output back to the frontend
+//     res.json(parsedOutput);
 
-  } catch (error) {
-    console.error("Error fetching from Gemini API:", error.response?.data || error.message);
-    res.status(500).json({ error: "Failed to generate response from Gemini API." });
-  }
-});
+//   } catch (error) {
+//     console.error("Error fetching from Gemini API:", error.response?.data || error.message);
+//     res.status(500).json({ error: "Failed to generate response from Gemini API." });
+//   }
+// });
 
 
 //  Linked List
