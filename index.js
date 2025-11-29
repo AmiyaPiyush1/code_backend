@@ -35,7 +35,7 @@ const PORT_RANGE_END = 3200;
 
 // Global error handling for uncaught exceptions
 process.on('uncaughtException', (err) => {
-    logger.error('UNCAUGHT EXCEPTION! 💥 Shutting down...', {
+    logger.error('UNCAUGHT EXCEPTION!', {
         error: err.message,
         stack: err.stack
     });
@@ -52,51 +52,48 @@ const connectWithRetry = async () => {
             error: err.message,
             retrying: true
         });
-        setTimeout(connectWithRetry, 5000); // Retry after 5 seconds
+        setTimeout(connectWithRetry, 5000);
     }
 };
 
 connectWithRetry();
 
+// Basic root route (optional)
+app.get("/", (req, res) => {
+    res.send("🚀 Backend running successfully on Render");
+});
+
 // Security Middleware
-app.use(helmet()); // Set security HTTP headers
-app.use(mongoSanitize()); // Sanitize MongoDB queries
-app.use(xss()); // Prevent XSS attacks
-app.use(hpp()); // Prevent HTTP Parameter Pollution
+app.use(helmet());
+app.use(mongoSanitize());
+app.use(xss());
+app.use(hpp());
 
 // Rate limiting
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 200, // Limit each IP to 200 requests per windowMs
+    windowMs: 15 * 60 * 1000,
+    max: 200,
     message: 'Too many requests from this IP, please try again later.',
     standardHeaders: true,
     legacyHeaders: false,
-    skip: (req) => req.path === '/api/auth/login' // Skip rate limiting for login route
+    skip: (req) => req.path === '/api/auth/login'
 });
-<<<<<<< HEAD
-=======
-app.get("/", (req, res) => {
-  res.send("🚀 Backend running successfully on Render");
-});
->>>>>>> b7638d98ad08b6584f276704bccee5e41cb48bc3
 app.use('/api/', limiter);
 
 // Compression middleware
 app.use(compression());
 
-// Body parser middleware
-app.use(express.json({ limit: '10kb' })); // Limit body size
+// Body parser
+app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(cookieParser());
 
-// CORS middleware
+// CORS
 app.use(cors(corsOptions));
 app.use(logCorsRequests);
-
-// Handle preflight requests
 app.options('*', cors(corsOptions));
 
-// Session configuration with enhanced security
+// Session
 app.use(session({
     secret: process.env.SESSION_SECRET || 'your-secret-key',
     resave: false,
@@ -105,17 +102,17 @@ app.use(session({
         secure: process.env.NODE_ENV === 'production',
         httpOnly: true,
         sameSite: 'strict',
-        maxAge: 24 * 60 * 60 * 1000 // 24 hours
+        maxAge: 24 * 60 * 60 * 1000
     },
-    name: 'sessionId', // Change default connect.sid
-    rolling: true // Refresh session on activity
+    name: 'sessionId',
+    rolling: true
 }));
 
-// Initialize Passport
+// Passport
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Request logging middleware
+// Request Logging
 app.use((req, res, next) => {
     logger.info(`${req.method} ${req.url}`, {
         ip: req.ip,
@@ -124,7 +121,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// API Routes
+// Routes
 app.use("/api/auth", profileRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/auth", loginRoute);
@@ -132,16 +129,15 @@ app.use("/api/auth", signupRoute);
 app.use("/api/gemini", geminiRoute);
 app.use("/", generateRoute.router);
 
-// Health check route with detailed status
+// Health route
 app.get('/health', (req, res) => {
-    const health = {
+    res.status(200).json({
         status: 'ok',
         timestamp: new Date(),
         uptime: process.uptime(),
         memory: process.memoryUsage(),
         environment: process.env.NODE_ENV
-    };
-    res.status(200).json(health);
+    });
 });
 
 // 404 handler
@@ -151,22 +147,18 @@ app.use((req, res, next) => {
         url: req.url,
         ip: req.ip
     });
-<<<<<<< HEAD
-    next(new AppError('Route not found', 404, ERROR_TYPES.NOT_FOUND));
-=======
-    // Only pass minimal error info for 404
+
     const err = new AppError('Route not found', 404, ERROR_TYPES.NOT_FOUND);
-    err.stack = undefined; // Prevent stack trace for 404
+    err.stack = undefined;
     next(err);
->>>>>>> b7638d98ad08b6584f276704bccee5e41cb48bc3
 });
 
-// Error handling middleware
+// Error handler
 app.use(errorHandler);
 
 // Unhandled promise rejections
 process.on('unhandledRejection', (err) => {
-    logger.error('UNHANDLED REJECTION! 💥 Shutting down...', {
+    logger.error('UNHANDLED REJECTION!', {
         error: err.message,
         stack: err.stack
     });
@@ -182,19 +174,7 @@ const gracefulShutdown = () => {
 process.on('SIGTERM', gracefulShutdown);
 process.on('SIGINT', gracefulShutdown);
 
-// Start server with error handling
-<<<<<<< HEAD
-try {
-    startServer(app, DEFAULT_PORT, PORT_RANGE_START, PORT_RANGE_END);
-    logger.success(`Server started on port ${DEFAULT_PORT}`);
-} catch (error) {
-    logger.error('Failed to start server', {
-        error: error.message,
-        stack: error.stack
-    });
-    process.exit(1);
-}
-=======
+// Start the server
 (async () => {
     try {
         await startServer(app, DEFAULT_PORT, PORT_RANGE_START, PORT_RANGE_END);
@@ -206,4 +186,3 @@ try {
         process.exit(1);
     }
 })();
->>>>>>> b7638d98ad08b6584f276704bccee5e41cb48bc3
