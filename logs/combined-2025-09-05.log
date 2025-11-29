@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {"context":{},"level":"info","message":"ℹ️ Checking Gemini API configuration...","timestamp":"2025-09-05 13:17:24:1724"}
 {"context":{},"level":"info","message":"✅ Gemini API initialized successfully","timestamp":"2025-09-05 13:17:24:1724"}
 {"context":{},"level":"info","message":"✅ Server started on port 3000","timestamp":"2025-09-05 13:17:24:1724"}
@@ -134,3 +135,96 @@
 {"context":{"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0"},"level":"info","message":"ℹ️ GET /api/auth/me","timestamp":"2025-09-05 13:53:44:5344"}
 {"context":{},"level":"info","message":"ℹ️ User authenticated: qwerty@gmail.com (::1)","timestamp":"2025-09-05 13:53:44:5344"}
 {"action":"getProfile","context":{"userId":"67e15894a36b4d477940e648"},"level":"info","message":"✅ Profile retrieved successfully","timestamp":"2025-09-05 13:53:44:5344","userId":"67e15894a36b4d477940e648"}
+=======
+{"context":{},"level":"info","message":"ℹ️ Checking Gemini API configuration...","timestamp":"2025-09-05 13:13:24:1324"}
+{"context":{},"level":"info","message":"✅ Gemini API initialized successfully","timestamp":"2025-09-05 13:13:24:1324"}
+{"context":{},"level":"info","message":"✅ Server running at http://localhost:3000","timestamp":"2025-09-05 13:13:24:1324"}
+{"context":{},"level":"info","message":"✅ MongoDB connection established","timestamp":"2025-09-05 13:13:25:1325"}
+{"context":{},"level":"info","message":"✅ Successfully connected to MongoDB (Attempt 1)","timestamp":"2025-09-05 13:13:25:1325"}
+{"context":{},"level":"info","message":"✅ Successfully connected to MongoDB","timestamp":"2025-09-05 13:13:25:1325"}
+{"context":{},"level":"info","message":"ℹ️ Email server is ready to send messages","timestamp":"2025-09-05 13:13:26:1326"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:14:00:140"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:14:30:1430"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:15:00:150"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:15:30:1530"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:16:00:160"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:16:30:1630"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:17:00:170"}
+{"context":{},"level":"info","message":"ℹ️ Checking Gemini API configuration...","timestamp":"2025-09-05 13:17:30:1730"}
+{"context":{},"level":"info","message":"✅ Gemini API initialized successfully","timestamp":"2025-09-05 13:17:30:1730"}
+{"context":{},"level":"info","message":"✅ Server running at http://localhost:3000","timestamp":"2025-09-05 13:17:30:1730"}
+{"context":{},"level":"info","message":"✅ MongoDB connection established","timestamp":"2025-09-05 13:17:31:1731"}
+{"context":{},"level":"info","message":"✅ Successfully connected to MongoDB (Attempt 1)","timestamp":"2025-09-05 13:17:31:1731"}
+{"context":{},"level":"info","message":"✅ Successfully connected to MongoDB","timestamp":"2025-09-05 13:17:31:1731"}
+{"context":{},"level":"info","message":"ℹ️ Email server is ready to send messages","timestamp":"2025-09-05 13:17:32:1732"}
+{"context":{},"level":"info","message":"ℹ️ Checking Gemini API configuration...","timestamp":"2025-09-05 13:17:35:1735"}
+{"context":{},"level":"info","message":"✅ Gemini API initialized successfully","timestamp":"2025-09-05 13:17:35:1735"}
+{"context":{},"level":"info","message":"✅ Server running at http://localhost:3000","timestamp":"2025-09-05 13:17:35:1735"}
+{"context":{},"level":"info","message":"✅ MongoDB connection established","timestamp":"2025-09-05 13:17:35:1735"}
+{"context":{},"level":"info","message":"✅ Successfully connected to MongoDB (Attempt 1)","timestamp":"2025-09-05 13:17:35:1735"}
+{"context":{},"level":"info","message":"✅ Successfully connected to MongoDB","timestamp":"2025-09-05 13:17:35:1735"}
+{"context":{},"level":"info","message":"ℹ️ Email server is ready to send messages","timestamp":"2025-09-05 13:17:36:1736"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:18:10:1810"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:18:40:1840"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:19:10:1910"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:19:40:1940"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:20:10:2010"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:20:40:2040"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:21:10:2110"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:21:40:2140"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:22:10:2210"}
+{"context":{"failed":0,"lastError":null,"lastSent":null,"sent":0},"level":"info","message":"ℹ️ Email Statistics:","timestamp":"2025-09-05 13:22:35:2235"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:22:40:2240"}
+{"context":{},"level":"info","message":"ℹ️ Request with no origin (non-browser request)","timestamp":"2025-09-05 13:23:02:232"}
+{"context":{"ip":"::1","method":"GET","origin":"Unknown","path":"/api/auth/google","timestamp":"2025-09-05T07:53:02.477Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"},"level":"info","message":"ℹ️ CORS Request Details:","timestamp":"2025-09-05 13:23:02:232"}
+{"context":{"ip":"::1","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"},"level":"info","message":"ℹ️ GET /api/auth/google","timestamp":"2025-09-05 13:23:02:232"}
+{"context":{},"level":"info","message":"ℹ️ Request with no origin (non-browser request)","timestamp":"2025-09-05 13:23:10:2310"}
+{"context":{"ip":"::1","method":"GET","origin":"Unknown","path":"/api/auth/google/callback","timestamp":"2025-09-05T07:53:10.308Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"},"level":"info","message":"ℹ️ CORS Request Details:","timestamp":"2025-09-05 13:23:10:2310"}
+{"context":{"ip":"::1","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"},"level":"info","message":"ℹ️ GET /api/auth/google/callback?code=4%2F0AVMBsJgLMeei6dONLzRRTH-3kQjgX1RpQb8TLocIHZMQlTEFHA2Rr69rtzFszJobPVWd4g&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent","timestamp":"2025-09-05 13:23:10:2310"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:23:10:2310"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:23:40:2340"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:24:10:2410"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:24:40:2440"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:25:10:2510"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:25:40:2540"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:26:10:2610"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:26:40:2640"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:27:10:2710"}
+{"context":{"failed":0,"lastError":null,"lastSent":null,"sent":0},"level":"info","message":"ℹ️ Email Statistics:","timestamp":"2025-09-05 13:27:35:2735"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:27:40:2740"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:28:10:2810"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:28:40:2840"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:29:10:2910"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:29:40:2940"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:30:10:3010"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:30:40:3040"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:31:10:3110"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:31:40:3140"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:32:10:3210"}
+{"context":{"failed":0,"lastError":null,"lastSent":null,"sent":0},"level":"info","message":"ℹ️ Email Statistics:","timestamp":"2025-09-05 13:32:35:3235"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:32:40:3240"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:33:10:3310"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:33:40:3340"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:34:10:3410"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:34:40:3440"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:35:10:3510"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:35:40:3540"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:36:10:3610"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:36:40:3640"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:37:10:3710"}
+{"context":{"failed":0,"lastError":null,"lastSent":null,"sent":0},"level":"info","message":"ℹ️ Email Statistics:","timestamp":"2025-09-05 13:37:35:3735"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:37:40:3740"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:38:10:3810"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:38:40:3840"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:39:10:3910"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:39:40:3940"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:40:10:4010"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:40:40:4040"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:41:10:4110"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:41:40:4140"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:42:10:4210"}
+{"context":{"failed":0,"lastError":null,"lastSent":null,"sent":0},"level":"info","message":"ℹ️ Email Statistics:","timestamp":"2025-09-05 13:42:34:4234"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:42:40:4240"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:43:10:4310"}
+{"context":{},"level":"info","message":"ℹ️ MongoDB Pool Stats: {\"connections\":0,\"available\":0,\"pending\":0,\"max\":0}","timestamp":"2025-09-05 13:43:40:4340"}
+>>>>>>> b7638d98ad08b6584f276704bccee5e41cb48bc3

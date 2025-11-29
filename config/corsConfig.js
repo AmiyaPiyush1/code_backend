@@ -50,7 +50,11 @@ const allowedOrigins = new Set([
     // Production
     "https://code-stream-96syog8wp-anurag-amrev-7557s-projects.vercel.app",
     "https://code-stream-eta.vercel.app",
+<<<<<<< HEAD
     "https://codeanimation-mauve.vercel.app/",
+=======
+    "https://codeanimation-mauve.vercel.app",
+>>>>>>> b7638d98ad08b6584f276704bccee5e41cb48bc3
     
     // Add your production domains here
     ...(CONFIG.ENVIRONMENT === 'production' ? [

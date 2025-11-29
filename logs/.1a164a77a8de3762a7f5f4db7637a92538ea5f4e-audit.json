@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/Users/anuragverma/Downloads/code_backend-main/logs/.1a164a77a8de3762a7f5f4db7637a92538ea5f4e-audit.json",
+    "files": [
+        {
+            "date": 1757057604336,
+            "name": "/Users/anuragverma/Downloads/code_backend-main/logs/error-2025-09-05.log",
+            "hash": "98b3420e43ae111ff507197059bc30fd7ce650fa556b3fc35241d6826591cea1"
+        }
+    ],
+    "hashType": "sha256"
+}

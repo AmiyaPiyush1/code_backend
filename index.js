@@ -73,6 +73,12 @@ const limiter = rateLimit({
     legacyHeaders: false,
     skip: (req) => req.path === '/api/auth/login' // Skip rate limiting for login route
 });
+<<<<<<< HEAD
+=======
+app.get("/", (req, res) => {
+  res.send("🚀 Backend running successfully on Render");
+});
+>>>>>>> b7638d98ad08b6584f276704bccee5e41cb48bc3
 app.use('/api/', limiter);
 
 // Compression middleware
@@ -145,7 +151,14 @@ app.use((req, res, next) => {
         url: req.url,
         ip: req.ip
     });
+<<<<<<< HEAD
     next(new AppError('Route not found', 404, ERROR_TYPES.NOT_FOUND));
+=======
+    // Only pass minimal error info for 404
+    const err = new AppError('Route not found', 404, ERROR_TYPES.NOT_FOUND);
+    err.stack = undefined; // Prevent stack trace for 404
+    next(err);
+>>>>>>> b7638d98ad08b6584f276704bccee5e41cb48bc3
 });
 
 // Error handling middleware
@@ -170,6 +183,7 @@ process.on('SIGTERM', gracefulShutdown);
 process.on('SIGINT', gracefulShutdown);
 
 // Start server with error handling
+<<<<<<< HEAD
 try {
     startServer(app, DEFAULT_PORT, PORT_RANGE_START, PORT_RANGE_END);
     logger.success(`Server started on port ${DEFAULT_PORT}`);
@@ -180,3 +194,16 @@ try {
     });
     process.exit(1);
 }
+=======
+(async () => {
+    try {
+        await startServer(app, DEFAULT_PORT, PORT_RANGE_START, PORT_RANGE_END);
+    } catch (error) {
+        logger.error('Failed to start server', {
+            error: error.message,
+            stack: error.stack
+        });
+        process.exit(1);
+    }
+})();
+>>>>>>> b7638d98ad08b6584f276704bccee5e41cb48bc3
