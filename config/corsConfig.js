@@ -44,53 +44,43 @@ const allowedOrigins = new Set([
     "http://127.0.0.1:5174",
     "http://127.0.0.1:5175",
     "http://127.0.0.1:5176",
-    "http://localhost:3000", // Added for backend
-    "http://127.0.0.1:3000", // Added for backend
-    
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+
     // Production
     "https://code-stream-96syog8wp-anurag-amrev-7557s-projects.vercel.app",
     "https://code-stream-eta.vercel.app",
-<<<<<<< HEAD
-    "https://codeanimation-mauve.vercel.app/",
-=======
     "https://codeanimation-mauve.vercel.app",
->>>>>>> b7638d98ad08b6584f276704bccee5e41cb48bc3
-    
-    // Add your production domains here
-    ...(CONFIG.ENVIRONMENT === 'production' ? [
-        // Production domains
-    ] : [])
+
+    ...(CONFIG.ENVIRONMENT === 'production' ? [] : [])
 ]);
 
 // Rate limiters for CORS requests
 const corsRateLimiter = rateLimit({
-    windowMs: 60 * 1000, // 1 minute
+    windowMs: 60 * 1000,
     max: CONFIG.MAX_REQUESTS_PER_MINUTE,
     message: { error: 'Too many requests from this origin' },
     handler: (req, res, next) => {
         next(new AppError('CORS rate limit exceeded', 429, ERROR_TYPES.RATE_LIMIT));
     },
     keyGenerator: (req) => req.headers.origin || req.ip,
-    skip: (req) => !req.headers.origin // Skip rate limiting for non-CORS requests
+    skip: (req) => !req.headers.origin
 });
 
 // Enhanced CORS Configuration
 const corsOptions = {
     origin: (origin, callback) => {
         try {
-            // Allow requests with no origin (like mobile apps, curl, etc.)
             if (!origin) {
                 logger.info('Request with no origin (non-browser request)');
                 return callback(null, true);
             }
 
-            // Check if origin is allowed
             if (allowedOrigins.has(origin)) {
                 logger.info(`Allowed CORS request from: ${origin}`);
                 return callback(null, true);
             }
 
-            // Log and reject unauthorized origins
             logger.warning(`Blocked CORS request from unauthorized origin: ${origin}`);
             callback(new AppError('CORS policy violation', 403, ERROR_TYPES.SECURITY), false);
         } catch (error) {
@@ -100,7 +90,7 @@ const corsOptions = {
     },
     credentials: true,
     methods: CONFIG.ALLOWED_METHODS,
-    allowedHeaders: [...CONFIG.ALLOWED_HEADERS, 'Authorization'], // Added Authorization header
+    allowedHeaders: [...CONFIG.ALLOWED_HEADERS, 'Authorization'],
     exposedHeaders: CONFIG.EXPOSED_HEADERS,
     optionsSuccessStatus: 204,
     preflightContinue: false,
@@ -118,7 +108,6 @@ const logCorsRequests = (req, res, next) => {
         const userAgent = req.headers['user-agent'] || 'Unknown';
         const ip = req.ip || req.connection.remoteAddress;
 
-        // Log request details
         logger.info('CORS Request Details:', {
             origin,
             method,
@@ -128,7 +117,6 @@ const logCorsRequests = (req, res, next) => {
             timestamp: new Date().toISOString()
         });
 
-        // Add security headers
         res.setHeader('X-Content-Type-Options', 'nosniff');
         res.setHeader('X-Frame-Options', 'DENY');
         res.setHeader('X-XSS-Protection', '1; mode=block');
@@ -136,7 +124,6 @@ const logCorsRequests = (req, res, next) => {
         res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
         res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
 
-        // Add rate limit headers
         res.setHeader('X-Rate-Limit-Limit', CONFIG.MAX_REQUESTS_PER_MINUTE);
         res.setHeader('X-Rate-Limit-Remaining', res.getHeader('X-Rate-Limit-Remaining') || CONFIG.MAX_REQUESTS_PER_MINUTE);
         res.setHeader('X-Rate-Limit-Reset', Math.floor(Date.now() / 1000) + 60);

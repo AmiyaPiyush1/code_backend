@@ -7,11 +7,7 @@ const User = require('../models/User');
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-<<<<<<< HEAD
     callbackURL: "http://localhost:3000/api/auth/google/callback",
-=======
-    callbackURL: "https://code-backend-89a2.onrender.com/api/auth/google/callback",
->>>>>>> b7638d98ad08b6584f276704bccee5e41cb48bc3
     scope: ['profile', 'email']
   },
   async function(accessToken, refreshToken, profile, done) {
@@ -24,32 +20,23 @@ passport.use(new GoogleStrategy({
         photos: profile.photos
       });
 
-      // First try to find user by Google ID
       let user = await User.findOne({ googleId: profile.id });
       
       if (!user) {
-        // If not found by Google ID, try to find by email
         const email = profile.emails?.[0]?.value;
         if (email) {
           user = await User.findOne({ email });
           if (user) {
-            // Update existing user with Google ID
-            console.log('Updating existing user with Google ID:', user._id);
-            console.log('Google profile photo:', profile.photos?.[0]?.value);
             user.googleId = profile.id;
             user.name = profile.displayName;
             user.picture = profile.photos?.[0]?.value;
             user.lastLogin = new Date();
             await user.save();
-            console.log('Updated user picture:', user.picture);
           }
         }
       }
       
       if (!user) {
-        // Create new user if doesn't exist
-        console.log('Creating new user for Google ID:', profile.id);
-        console.log('Google profile photo:', profile.photos?.[0]?.value);
         user = await User.create({
           googleId: profile.id,
           email: profile.emails[0].value,
@@ -57,17 +44,11 @@ passport.use(new GoogleStrategy({
           picture: profile.photos[0].value,
           lastLogin: new Date()
         });
-        console.log('New user created with picture:', user.picture);
       } else {
-        console.log('Updating existing user:', user._id);
-        console.log('Current picture:', user.picture);
-        console.log('New Google picture:', profile.photos?.[0]?.value);
-        // Update last login and profile info
         user.lastLogin = new Date();
         user.name = profile.displayName;
         user.picture = profile.photos?.[0]?.value;
         await user.save();
-        console.log('Updated user picture:', user.picture);
       }
       
       return done(null, user);
@@ -82,11 +63,7 @@ passport.use(new GoogleStrategy({
 passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
-<<<<<<< HEAD
     callbackURL: "http://localhost:3000/api/auth/github/callback",
-=======
-    callbackURL: "https://code-backend-89a2.onrender.com/api/auth/github/callback",
->>>>>>> b7638d98ad08b6584f276704bccee5e41cb48bc3
     scope: ['user:email']
   },
   async function(accessToken, refreshToken, profile, done) {
@@ -101,21 +78,15 @@ passport.use(new GitHubStrategy({
         photos: profile.photos
       });
 
-      if (!profile.id) {
-        throw new Error('GitHub profile ID is missing');
-      }
+      if (!profile.id) throw new Error('GitHub profile ID is missing');
 
-      // First try to find user by GitHub ID
       let user = await User.findOne({ githubId: profile.id });
       
       if (!user) {
-        // If not found by GitHub ID, try to find by email
         const email = profile.emails?.[0]?.value;
         if (email) {
           user = await User.findOne({ email });
           if (user) {
-            // Update existing user with GitHub ID
-            console.log('Updating existing user with GitHub ID:', user._id);
             user.githubId = profile.id;
             user.lastLogin = new Date();
             await user.save();
@@ -124,8 +95,6 @@ passport.use(new GitHubStrategy({
       }
       
       if (!user) {
-        // Create new user if doesn't exist
-        console.log('Creating new user for GitHub ID:', profile.id);
         user = await User.create({
           githubId: profile.id,
           email: profile.emails?.[0]?.value || `${profile.id}@github.com`,
@@ -133,10 +102,7 @@ passport.use(new GitHubStrategy({
           picture: profile.photos?.[0]?.value,
           lastLogin: new Date()
         });
-        console.log('New user created:', user._id);
       } else {
-        console.log('Updating existing user:', user._id);
-        // Update last login
         user.lastLogin = new Date();
         await user.save();
       }
@@ -162,4 +128,4 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
-module.exports = passport; 
+module.exports = passport;
