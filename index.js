@@ -1,10 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const { corsOptions, logCorsRequests } = require("./config/corsConfig");
-const { startServer } = require("./config/portConfig");
 const cookieParser = require("cookie-parser");
-const session = require('express-session');
+const session = require("express-session");
 const passport = require('./config/passport');
 const helmet = require('helmet');
 const compression = require('compression');
@@ -14,6 +12,8 @@ const hpp = require('hpp');
 const rateLimit = require('express-rate-limit');
 const logger = require('./config/logger');
 
+const { corsOptions, logCorsRequests } = require("./config/corsConfig");
+
 // Import routes
 const loginRoute = require("./routes/auth/login");
 const signupRoute = require("./routes/auth/signup");
@@ -22,18 +22,15 @@ const generateRoute = require("./routes/debugger/generate");
 const authRoute = require("./routes/auth");
 const geminiRoute = require("./routes/gemini");
 
-// Import configurations
+// Import DB config + error handling
 const connectDB = require("./config/database");
 const { errorHandler, AppError, ERROR_TYPES } = require('./middleware/errorHandler');
 
 const app = express();
 
-// Port configuration
-const DEFAULT_PORT = process.env.PORT || 3000;
-const PORT_RANGE_START = 3000;
-const PORT_RANGE_END = 3200;
-
-// Global error handling for uncaught exceptions
+// ==========================
+//  GLOBAL ERROR HANDLING
+// ==========================
 process.on('uncaughtException', (err) => {
     logger.error('UNCAUGHT EXCEPTION!', {
         error: err.message,
@@ -42,7 +39,9 @@ process.on('uncaughtException', (err) => {
     process.exit(1);
 });
 
-// Connect to MongoDB with retry mechanism
+// ==========================
+//  CONNECT TO MONGO
+// ==========================
 const connectWithRetry = async () => {
     try {
         await connectDB();
@@ -58,42 +57,50 @@ const connectWithRetry = async () => {
 
 connectWithRetry();
 
-// Basic root route (optional)
+// ==========================
+//   BASIC ROOT ROUTE
+// ==========================
 app.get("/", (req, res) => {
     res.send("🚀 Backend running successfully on Render");
 });
 
-// Security Middleware
+// ==========================
+//  SECURITY MIDDLEWARE
+// ==========================
 app.use(helmet());
 app.use(mongoSanitize());
 app.use(xss());
 app.use(hpp());
 
-// Rate limiting
+// ==========================
+//  RATE LIMITING
+// ==========================
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 200,
-    message: 'Too many requests from this IP, please try again later.',
     standardHeaders: true,
     legacyHeaders: false,
     skip: (req) => req.path === '/api/auth/login'
 });
 app.use('/api/', limiter);
 
-// Compression middleware
-app.use(compression());
-
-// Body parser
+// ==========================
+//  BODY PARSING
+// ==========================
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(cookieParser());
 
-// CORS
+// ==========================
+//  CORS
+// ==========================
 app.use(cors(corsOptions));
 app.use(logCorsRequests);
 app.options('*', cors(corsOptions));
 
-// Session
+// ==========================
+//  SESSION
+// ==========================
 app.use(session({
     secret: process.env.SESSION_SECRET || 'your-secret-key',
     resave: false,
@@ -108,11 +115,15 @@ app.use(session({
     rolling: true
 }));
 
-// Passport
+// ==========================
+//  PASSPORT
+// ==========================
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Request Logging
+// ==========================
+//  REQUEST LOGGING
+// ==========================
 app.use((req, res, next) => {
     logger.info(`${req.method} ${req.url}`, {
         ip: req.ip,
@@ -121,7 +132,9 @@ app.use((req, res, next) => {
     next();
 });
 
-// Routes
+// ==========================
+//  ROUTES
+// ==========================
 app.use("/api/auth", profileRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/auth", loginRoute);
@@ -129,18 +142,21 @@ app.use("/api/auth", signupRoute);
 app.use("/api/gemini", geminiRoute);
 app.use("/", generateRoute.router);
 
-// Health route
+// ==========================
+//  HEALTH CHECK
+// ==========================
 app.get('/health', (req, res) => {
     res.status(200).json({
         status: 'ok',
         timestamp: new Date(),
         uptime: process.uptime(),
-        memory: process.memoryUsage(),
         environment: process.env.NODE_ENV
     });
 });
 
-// 404 handler
+// ==========================
+//  404 HANDLER
+// ==========================
 app.use((req, res, next) => {
     logger.warning('Route not found', {
         method: req.method,
@@ -153,10 +169,14 @@ app.use((req, res, next) => {
     next(err);
 });
 
-// Error handler
+// ==========================
+//  ERROR HANDLER
+// ==========================
 app.use(errorHandler);
 
-// Unhandled promise rejections
+// ==========================
+//  UNHANDLED PROMISE REJECTION
+// ==========================
 process.on('unhandledRejection', (err) => {
     logger.error('UNHANDLED REJECTION!', {
         error: err.message,
@@ -165,24 +185,23 @@ process.on('unhandledRejection', (err) => {
     process.exit(1);
 });
 
-// Graceful shutdown
-const gracefulShutdown = () => {
-    logger.info('Received shutdown signal');
+// ==========================
+//  GRACEFUL SHUTDOWN
+// ==========================
+process.on('SIGTERM', () => {
+    logger.info('Received SIGTERM — Shutting down gracefully');
     process.exit(0);
-};
+});
+process.on('SIGINT', () => {
+    logger.info('Received SIGINT — Shutting down gracefully');
+    process.exit(0);
+});
 
-process.on('SIGTERM', gracefulShutdown);
-process.on('SIGINT', gracefulShutdown);
+// ==========================
+//  START SERVER (Render)
+// ==========================
+const PORT = process.env.PORT;
 
-// Start the server
-(async () => {
-    try {
-        await startServer(app, DEFAULT_PORT, PORT_RANGE_START, PORT_RANGE_END);
-    } catch (error) {
-        logger.error('Failed to start server', {
-            error: error.message,
-            stack: error.stack
-        });
-        process.exit(1);
-    }
-})();
+app.listen(PORT, () => {
+    logger.success(`🚀 Server running on Render (port: ${PORT})`);
+});
